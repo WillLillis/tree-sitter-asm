@@ -57,12 +57,12 @@ module.exports = grammar({
         float: $ => /-?[0-9][0-9_]*\.([0-9][0-9_]*)?/,
         string: $ => /"[^"]*"/,
 
+        meta_ident: $ => /\.[a-z_]+/,
+        _ident: $ => /[a-zA-Z_0-9.]+/,
         word: $ => /[a-zA-Z0-9_]+/,
         _reg: $ => /%?[a-z0-9]+/,
         reg: $ => choice($._reg, $.word),
-        meta_ident: $ => /\.[a-z_]+/,
-        _ident: $ => /[a-zA-Z_0-9.]+/,
-        ident: $ => choice($._ident, $.meta_ident, $.reg),
+        ident: $ => choice(prec(5, $._ident), prec(1, $.meta_ident), prec(0, $.reg)),
 
         line_comment: $ => /(\/\/|#|;).*/,
         block_comment: $ =>

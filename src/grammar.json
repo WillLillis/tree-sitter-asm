@@ -460,6 +460,14 @@
       "type": "PATTERN",
       "value": "\"[^\"]*\""
     },
+    "meta_ident": {
+      "type": "PATTERN",
+      "value": "\\.[a-z_]+"
+    },
+    "_ident": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_0-9.]+"
+    },
     "word": {
       "type": "PATTERN",
       "value": "[a-zA-Z0-9_]+"
@@ -481,28 +489,32 @@
         }
       ]
     },
-    "meta_ident": {
-      "type": "PATTERN",
-      "value": "\\.[a-z_]+"
-    },
-    "_ident": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z_0-9.]+"
-    },
     "ident": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_ident"
+          "type": "PREC",
+          "value": 5,
+          "content": {
+            "type": "SYMBOL",
+            "name": "_ident"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "meta_ident"
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "meta_ident"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "reg"
+          "type": "PREC",
+          "value": 0,
+          "content": {
+            "type": "SYMBOL",
+            "name": "reg"
+          }
         }
       ]
     },

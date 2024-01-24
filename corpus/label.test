@@ -1,0 +1,7 @@
+==========
+Basic label
+==========
+main:
+---
+(program
+    (label (ident)))
